@@ -1,0 +1,16 @@
+{
+    "LoginView": {
+        "title": "Iniciar Sesión",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "buttonLogin": "Iniciar Sesión"
+    },
+    "Navbar": {
+        "home": "Inicio",
+        "dashboard": "Tablero",
+        "logout": "Cerrar Sesión",
+        "login": "Iniciar Sesión",
+        "register": "Registrarse"
+    }
+}
+

@@ -1,0 +1,15 @@
+{
+    "LoginView": {
+        "title": "Loguearse",
+        "email": "Correo",
+        "password": "Contraseña",
+        "buttonLogin": "Loguearse"
+    },
+    "Navbar": {
+        "home": "Inicio",
+        "dashboard": "Panel",
+        "logout": "Salir",
+        "login": "Loguearse",
+        "register": "Registrarse"
+    }
+}
