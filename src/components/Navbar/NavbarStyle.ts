@@ -8,6 +8,10 @@ export const NavbarContainer = styled.nav`
   padding: 0 50px;
 `;
 
+export const Session = styled.nav`
+  display: flex;
+`;
+
 export const Container = styled.div`
   max-width: 100%;
   margin: 0 auto;

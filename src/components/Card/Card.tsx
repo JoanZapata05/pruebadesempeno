@@ -1,8 +1,17 @@
 import { CardProps } from '../../types/productInterface';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'; 
-import Button from "../UI/Button/Button";
-import { CardContainer, ProductImage, ProductTitle, ProductPrice, ButtonContainer, FavoriteIcon } from "./Card.Style";
+import { AiOutlineHeart } from 'react-icons/ai';
+import { FaShoppingCart } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import {
+  CardContainer,
+  ProductImage,
+  ProductTitle,
+  ProductPrice,
+  ButtonContainer,
+  FavoriteIcon,
+  CartButton,
+  IconWrapper
+} from "./Card.Style";
 
 const ProductCard: React.FC<CardProps> = ({ product }) => {
   const router = useRouter();
@@ -21,15 +30,18 @@ const ProductCard: React.FC<CardProps> = ({ product }) => {
 
   return (
     <CardContainer>
-      <ProductImage src={product.image} alt={product.title} />
+      <IconWrapper>
+        <FavoriteIcon onClick={toggleFavorite}>
+          <AiOutlineHeart color="#ff0000" size={18} />
+        </FavoriteIcon>
+      </IconWrapper>
+      <ProductImage src={product.image} alt={product.title} onClick={viewProductDetails} />
       <ProductTitle>{product.title}</ProductTitle>
       <ProductPrice>${product.price}</ProductPrice>
       <ButtonContainer>
-        <Button onClick={addToCart} label="Agregar al carrito" />
-        <Button onClick={viewProductDetails} label="Ver detalles" />
-        <FavoriteIcon onClick={toggleFavorite}>
-          <AiFillHeart color="#ff0000" />
-        </FavoriteIcon>
+        <CartButton onClick={addToCart}>
+          <FaShoppingCart />
+        </CartButton>
       </ButtonContainer>
     </CardContainer>
   );

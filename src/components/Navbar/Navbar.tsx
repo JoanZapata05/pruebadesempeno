@@ -1,6 +1,6 @@
 "use client";
 import { signOut, useSession } from 'next-auth/react';
-import { NavbarContainer, NavLink, SignoutButton, Container } from './NavbarStyle';
+import { NavbarContainer, NavLink, SignoutButton, Container, Session } from './NavbarStyle';
 import { useTranslations } from 'next-intl';
 import LanguageSelector from '@/components/UI/SelectLanguage/SelectLanguage';
 
@@ -15,10 +15,10 @@ const NavigationBar = () => {
         
         <div className="nav-links">
           {session?.user ? (
-            <>
+            <Session>
               <NavLink href="/dashboard">{translate('dashboard')}</NavLink>
               <SignoutButton onClick={() => signOut()}>{translate('logout')}</SignoutButton>
-            </>
+            </Session>
           ) : (
             <>
               <NavLink href="/login">{translate('login')}</NavLink>

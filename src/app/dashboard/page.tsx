@@ -16,9 +16,11 @@ const Div = styled.div`
 `;
 
 const H2 = styled.h2`
-  margin-top: 25px;
+  margin-top: 50px;
   text-align: center;
   color: black;
+  font-size: 40px;
+  font-weight: 500;
 `;
 
 const LoadingMessage = styled.p`
@@ -27,38 +29,38 @@ const LoadingMessage = styled.p`
   font-size: 18px;
   color: gray;
 `;
-
 interface SessionAuthenticate extends Session {
-  access_token: string;
-  user: IUser;   
+    access_token: string;
+    user:         IUser;   
 }
 
 interface IUser {
-  _id: string;
-  email: string;
-  username: string;
-  name: string;
-  phone: string;
-  __v: number;
-}
+    _id:      string;
+    email:    string;
+    username: string;
+    name:     string;
+    phone:    string;
+    __v:      number;
+  }
 
 interface IResponse<T> {
-  status: number;
-  data?: T;
-  error?: string;
-}  
+    status: number;        
+    data?: T;              
+    error?: string;        
+  }  
 
-const ProductsPage: React.FC = () => {
+// Componente ProductsPage
+const ProductsPage: React.FC= () => {
   const { data: session, status }: { data: SessionAuthenticate | null; status: "loading" | "authenticated" | "unauthenticated" } = useSession();
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [ loadingProducts, setLoadingProducts] = useState(true);
   
   useEffect(() => {
     const fetchProducts = async () => {
       if (!session?.access_token) return;
-
+    
       const token = session.access_token;
-
+    
       try {
         const response = await fetch('/api/products', {
           method: 'GET',
@@ -66,9 +68,9 @@ const ProductsPage: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+    
         const data: IResponse<IProduct[]> = await response.json(); 
-
+    
         if (response.ok) {
           setProducts(data.data || []); 
           console.log(data.data); 
@@ -105,4 +107,4 @@ const ProductsPage: React.FC = () => {
   );
 };
 
-export default ProductsPage;
+export default ProductsPage; 
