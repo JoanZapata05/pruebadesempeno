@@ -65,11 +65,11 @@ const HomePage = () => {
   const router = useRouter();
 
   const handleExploreProducts = () => {
-    router.push('/product'); // Redirige a la página de productos
+    router.push('/product'); 
   };
 
   const handleShopByCategory = () => {
-    router.push('/categories'); // Redirige a la página de categorías
+    router.push('/categories'); 
   };
 
   return (

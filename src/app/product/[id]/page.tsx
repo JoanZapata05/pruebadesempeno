@@ -10,8 +10,8 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 const Container = styled.div`
   padding: 50px;
-  max-width: 100%;
-  max-width: 700px; /* Ancho máximo */
+
+  max-width: 700px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 12px;
@@ -71,7 +71,7 @@ const BuyButton = styled.button`
   margin-top: 15px;
 
   &:hover {
-    background-color: #0548a0; /* Color más oscuro al pasar el ratón */
+    background-color: #0548a0;
   }
 `;
 
@@ -94,13 +94,12 @@ const BackButton = styled.button`
 `;
 
 const ProductDetails = () => {
-    const { data: session } = useSession(); // Obtiene la sesión
-    const { id } = useParams(); // Obtiene el ID del producto de la URL
-    const [product, setProduct] = useState<IProduct | null>(null); // Estado para almacenar el producto
-    const [loading, setLoading] = useState(true); // Estado de carga
-    const [error, setError] = useState<string | null>(null); // Estado para manejar errores
-    const router = useRouter(); // Para navegación
-
+    const { data: session } = useSession(); 
+    const { id } = useParams(); 
+    const [product, setProduct] = useState<IProduct | null>(null); 
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState<string | null>(null); 
+    const router = useRouter(); 
     useEffect(() => {
         const fetchProductDetails = async () => {
             if (!session?.access_token) {
@@ -109,52 +108,52 @@ const ProductDetails = () => {
                 return;
             }
 
-            const token = session.access_token; // Token de acceso de la sesión
+            const token = session.access_token; 
 
             try {
                 const response = await fetch(`/api/products/${id}`, {
                     method: 'GET',
                     headers: {
                         "Content-Type": 'application/json',
-                        "Authorization": `Bearer ${token}`, // Agregar el token en la cabecera
+                        "Authorization": `Bearer ${token}`, 
                     },
                 });
 
-                const data: IResponse<IProduct> = await response.json(); // Obtener datos de la respuesta
+                const data: IResponse<IProduct> = await response.json(); 
 
                 if (response.ok && data.data) {
-                    setProduct(data.data); // Establecer el producto en el estado
+                    setProduct(data.data); 
                 } else {
                     setError(data.error || "Error desconocido al obtener los detalles del producto.");
                 }
             } catch (error) {
                 setError('Error al recuperar los detalles del producto: ' + (error as Error).message);
             } finally {
-                setLoading(false); // Cambia el estado de carga
+                setLoading(false); 
             }
         };
 
         if (id) {
-            fetchProductDetails(); // Llamar a la función para obtener detalles del producto
+            fetchProductDetails();
         }
     }, [id, session]);
 
-    // Función para regresar a la página anterior
+
     const handleGoBack = () => {
-        router.back(); // Regresa a la página anterior
+        router.back(); 
     };
 
-    // Mostrar un mensaje de carga
+
     if (loading) {
         return <p>Cargando detalles del producto...</p>;
     }
 
-    // Mostrar mensaje de error
+
     if (error) {
         return <p>{error}</p>;
     }
 
-    // Mostrar los detalles del producto si se obtuvo correctamente
+  
     if (!product) {
         return <p>No se encontraron los detalles del producto.</p>;
     }

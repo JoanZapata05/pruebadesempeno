@@ -4,7 +4,7 @@ import { IProduct } from '../../../types/productInterface';
 export interface IResponse<T> {
   status: number;         
   data?: T;              
-  error?: string;       
+  error?: string;
 }
 
 async function fetchProductsFromBackend(token: string): Promise<IProduct[]> {
@@ -33,7 +33,7 @@ export async function GET(request: Request): Promise<IResponse<IProduct[]>> {
   try {
     const products: IProduct[] = await fetchProductsFromBackend(token);
     return NextResponse.json({ status: 200, data: products }); 
-  } catch (error) {
-    return NextResponse.json({ status: 500, error: 'Error al obtener los productos' });
+  } catch (error: any) {
+    return NextResponse.json({ status: 500, error: `Error al obtener los productos: ${error.message}` });
   }
 }

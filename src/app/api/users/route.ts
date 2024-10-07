@@ -20,7 +20,7 @@ async function registerUser(user: IUserRegistered): Promise<IResponseCreateUser>
       return await response.json();
     } catch (error) {
       console.error('Error en registerUser:', error);
-      throw error; // Lanzar el error para manejarlo en el componente
+      throw error; 
     }
   }
 
